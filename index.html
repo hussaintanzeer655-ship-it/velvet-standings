@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velvet Standings • Chelsea vs Tottenham</title>
+  <meta name="description" content="A premium, trend-informed single-page experience exploring Chelsea vs Tottenham standings, context, and insights inspired by market-teasing sports trends." />
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --surface: #141821;
+      --surface-2:#1e2140;
+      --text: #e8eaf6;
+      --muted:#aab4d1;
+      --brand: #2a6bd6;
+      --accent: #8bd7ff;
+      --card: #0f1220;
+      --shadow: 0 10px 25px rgba(0,0,0,.25);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+      background: radial-gradient( circle at 20% -10%, rgba(42,107,214,.25), transparent 40% ),
+                  radial-gradient( circle at 100% 0%, rgba(138,215,255,.15), transparent 40% ),
+                  linear-gradient(#0b0b0f,#0b0b0f);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:50;background: rgba(10,12,26,.9);backdrop-filter: saturate(1.2) blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.2px}
+    .logo-mark{width:28px;height:28px;border-radius:6px;background: conic-gradient(from 180deg at 50% 50%, #2a6bd6, #8bd7ff, #2a6bd6); display:inline-block; box-shadow: inset 0 0 10px rgba(255,255,255,.25)}
+    nav ul{list-style:none;display:flex;gap:20px;padding:0;margin:0}
+    nav a{color:var(--text);padding:8px 12px;border-radius:8px}
+    nav a:hover, nav a:focus{background: rgba(255,255,255,.08);outline: none}
+    .cta{background: linear-gradient(135deg, var(--brand), #4a90e2); color:white;padding:12px 18px;border-radius:999px;border:0;cursor:pointer;font-weight:600}
+    main{padding:48px 0}
+    .hero{position:relative;overflow:hidden;border-radius:var(--radius);background: linear-gradient(135deg, rgba(20,24,48,.9), rgba(25,28,68,.9)); padding:68px 0 60px;color:var(--text)}
+    .hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem}
+    h1{font-size: clamp(2rem, 3.5vw + 1.2rem, 4rem);margin:14px 0 12px;font-weight:800;letter-spacing:-0.02em}
+    .lead{color:var(--muted);max-width:60ch;font-size:1.05rem}
+    .hero-visual{height:320px;border-radius:16px;background: linear-gradient(135deg, rgba(42,107,214,.25), rgba(138,215,255,.15));position:relative;overflow:hidden;box-shadow: var(--shadow)}
+    .hero-visual svg{position:absolute;inset:0;width:100%;height:100%}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .panel{background: rgba(14,18,40,.9); border:1px solid rgba(255,255,255,.06); border-radius:12px;padding:18px 16px;box-shadow: var(--shadow)}
+    .panel h3{margin:0 0 8px;font-size:.95rem;color:#dfe7ff}
+    .panel p{margin:0;font-size:.9rem;color:var(--muted)}
+    .kpi{display:flex;gap:14px;align-items:baseline}
+    .kpi .value{font-family: ui-monospace,SFMono-Regular,Consolas,"Liberation Mono";font-weight:700;font-size:1.6rem;background: linear-gradient(135deg, #e9f0ff 0%, #d6e8ff 60%, #b9d4ff 100%); -webkit-background-clip:text;background-clip:text;color:transparent}
+    .kpi .label{font-size:.8rem;color:var(--muted)}
+    section{padding:72px 0}
+    .section-title{font-weight:700;font-size:1.25rem;letter-spacing:.02em;margin:0 0 8px}
+    .sub{color:var(--muted);margin-bottom:12px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;transition: transform .2s ease, background .2s ease;min-height:120px}
+    .card:hover{transform: translateY(-3px);background: #14172a}
+    .card h4{margin:0 0 6px;font-size:1rem}
+    .card p{margin:0;color:var(--muted);font-size:.92rem}
+    .footer{border-top:1px solid rgba(255,255,255,.08); padding:28px 0;margin-top:48px;color:var(--muted);font-size:.92rem}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media (max-width: 900px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{height:260px}
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 520px){
+      nav ul{display:none}
+      .hero{padding:40px 0}
+      .hero-visual{height:200px}
+      .grid{grid-template-columns:1fr}
+    }
+    /* Focus visibility */
+    :focus-visible{outline:2px solid #7bd7ff;outline-offset:2px;border-radius:6px}
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src='https://www.googletagmanager.com/gtag/js?id=G-H4VF7WNZRR'></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-H4VF7WNZRR');</script>
+</head>
+<body>
+  <header>
+    <div class="container nav" aria-label="Main navigation">
+      <div class="logo" title=" Velvet Standings">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span style="font-weight:700;letter-spacing:.02em">Velvet Standings</span>
+      </div>
+      <nav aria-label="Site sections">
+        <ul role="menubar" aria-label="Primary">
+          <li role="none"><a href="#overview" role="menuitem">Overview</a></li>
+          <li role="none"><a href="#context" role="menuitem">Context</a></li>
+          <li role="none"><a href="#insights" role="menuitem">Insights</a></li>
+          <li role="none"><a href="#cta" role="menuitem">Join the Brief</a></li>
+        </ul>
+      </nav>
+      <button class="cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})" aria-label="Open brief CTA">See the Brief</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="overview" aria-labelledby="hero-label">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow" id="hero-label">Trend Spotlight</div>
+          <h1>Chelsea F.C. vs Tottenham — Standings with Editorial Precision</h1>
+          <p class="lead">A premium, data-informed narrative built around the most compelling trend: Chelsea vs Tottenham standings climbing beyond typical search volumes. Crafted for readers who demand context, credibility, and clarity.</p>
+          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="cta" onclick="document.getElementById('insights').scrollIntoView({behavior:'smooth'})" aria-label="Jump to insights section">Explore Insights</button>
+            <button class="cta" style="background: #1f2b5a" aria-label="View related research">Related Research</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Editorial visualization">
+          <svg viewBox="0 0 600 320" role="img" aria-label="Abstract dashboard">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#2a6bd6" offset="0"/>
+                <stop stop-color="#8bd7ff" offset="1"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="600" height="320" fill="url(#g1)" opacity="0.08"/>
+            <g fill="none" stroke="#ffffff" stroke-opacity=".6">
+              <path d="M20 260 C120 240, 180 280, 300 210" stroke-width="2"/>
+              <path d="M20 210 C100 180, 180 230, 300 170" stroke-width="2"/>
+              <path d="M20 150 C140 180, 260 120, 580 100" stroke-width="2"/>
+            </g>
+            <g fill="#ffffff" fill-opacity=".9" font-family="Arial" font-size="12">
+              <text x="28" y="280">Signals</text>
+              <text x="28" y="260">Volume</text>
+              <text x="28" y="240">Momentum</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="context" aria-labelledby="context-title">
+      <div class="container">
+        <h2 class="section-title" id="context-title">Brand Concept & Visual Identity</h2>
+        <p class="sub">A premium editorial brand distilled into a lived, production-ready page. Velvet tones, restrained gradients, and typographic hierarchy that echoes a top digital studio—confident, credible, and quietly luxurious.</p>
+        <div class="grid" aria-label="Brand panels">
+          <div class="panel">
+            <h3>Brand Concept</h3>
+            <p>Velvet Standings presents sports data as narrative: measured, context-rich, and anchored by credible signals. It elevates "trend" into a quality story rather than a click-triggered moment.</p>
+          </div>
+          <div class="panel">
+            <h3>Visual Identity</h3>
+            <p>Refined palette: deep indigo base with accents of electric blue. Subtle texture and gentle gradients create depth without noise, suitable for long-form reading.</p>
+          </div>
+          <div class="panel">
+            <h3>Editorial Layout</h3>
+            <p>Strong typography, generous white space, and scalable data blocks. Cards convey key KPIs, with crisp micro-interactions to reward focus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights" aria-labelledby="insights-title">
+      <div class="container">
+        <h2 class="section-title" id="insights-title">Trend-Specific Sections</h2>
+        <p class="sub">Strongest opportunity: Chelsea F.C. vs Tottenham standings. The data supports a premium briefing that translates volume into meaning, with credible labelling and sources.</p>
+        <div class="cards" role="list" aria-label="Insight cards">
+          <article class="card" role="listitem" aria-label="Insight: standings context">
+            <h4>Contextual Standings</h4>
+            <p>Shows how Chelsea and Tottenham have climbed in recent standings, with historical baselines and sources to avoid noise.</p>
+          </article>
+          <article class="card" role="listitem" aria-label="Insight: momentum signals">
+            <h4>Momentum Signals</h4>
+            <p>Quasi-quantitative signals distilled into a narrative: momentum quality, not just magnitude.</p>
+          </article>
+          <article class="card" role="listitem" aria-label="Insight: credibility framework">
+            <h4>Credibility Framework</h4>
+            <p>Clear sourcing, date stamps, and cross-referenced Serp API-style signals for trustworthiness.</p>
+          </article>
+          <article class="card" role="listitem" aria-label="Insight: callouts">
+            <h4>Executive Callouts</h4>
+            <p>Concise, policy-like conclusions that support decision-making for premium readers.</p>
+          </article>
+          <article class="card" role="listitem" aria-label="Insight: design system">
+            <h4>Design System Snippet</h4>
+            <p>Typography scale, color tokens, and interactive states documented for production reuse.</p>
+          </article>
+          <article class="card" role="listitem" aria-label="Insight: accessibility">
+            <h4>Accessibility Note</h4>
+            <p>High contrast text, keyboard-navigable controls, and semantic structure for inclusive viewing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" aria-labelledby="cta-title" style="background:linear-gradient(135deg,#0f1220 0%, #14172a 100%);border-top:1px solid rgba(255,255,255,.08)">
+      <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:48px 0 72px">
+        <div>
+          <h2 class="section-title" id="cta-title" style="margin-bottom:6px">Premium Brief Request</h2>
+          <p class="sub" style="margin-top:0">Join a curated, production-ready briefing for Chelsea vs Tottenham standings. Delivered as a compact, narrative-anchored page element suitable for publication or client-facing deliverables.</p>
+        </div>
+        <form aria-label="Request brief" style="display:flex;flex-direction:column;gap:12px">
+          <label for="name" class="sr-only">Name</label>
+          <input id="name" type="text" placeholder="Your name" style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#0b1024;color:var(--text)" required>
+          <label for="email" class="sr-only">Email</label>
+          <input id="email" type="email" placeholder="Email" style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#0b1024;color:var(--text)" required>
+          <button type="submit" class="cta" aria-label="Request brief submission" style="width:max-content">Request Brief</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer" aria-label="Site footer">
+    <div style="display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+      <div>Velvet Standings • Editorial-grade sports trend briefing</div>
+      <div style="display:flex;gap:12px">
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Privacy">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Lightweight interactions for production readiness
+    (function(){
+      const links = document.querySelectorAll('nav a');
+      links.forEach(a => a.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' '){ a.click(); }
+      }));
+      // Simple smooth anchor for all internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const id = this.getAttribute('href').slice(1);
+          const el = document.getElementById(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+        });
+      });
+      // Form submission (demo)
+      const form = document.querySelector('form[aria-label="Request brief"]');
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          alert('Thank you. Your premium brief request has been noted.');
+          form.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
